@@ -3,5 +3,8 @@
 
 (def config (atom nil))
 
-(defn load-config []
+(defn load []
   (reset! config (read-string (slurp (env :authsvc-config-file)))))
+
+(defn forward-url [request]
+  (str (:sso-url @config) (:uri request)))

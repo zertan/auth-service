@@ -10,9 +10,7 @@
                  [bidi "2.1.3"]
                  [clj-http-lite "0.3.0"]
                  [cheshire "5.10.0"]
-                 [environ "1.2.0"]
-                 [javax.xml.bind/jaxb-api "2.3.1"]
-                 [org.glassfish.jaxb/jaxb-runtime "2.3.1"]]
+                 [environ "1.2.0"]]
   :source-paths ["src"]
   :main ^:skip-aot authsvc.core
   :target-path "target/%s"
@@ -22,7 +20,9 @@
                    :source-paths ["src.dev"]
                    :dependencies [[org.clojure/tools.nrepl "0.2.13"]
                                   [cider/cider-nrepl "0.25.0-alpha1"]
-                                  [ring/ring-devel "1.8.1"]]}
+                                  [ring/ring-devel "1.8.1"]
+                                  [javax.xml.bind/jaxb-api "2.3.1"]
+                                  [org.glassfish.jaxb/jaxb-runtime "2.3.1"]]}
 
              :prod {:source-paths ["src.prod"] ;; e.g. lein with-profile +test native-image
                     :native-image {:opts ["--initialize-at-build-time"
