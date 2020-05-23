@@ -1,6 +1,6 @@
-(ns h-w.core-test
+(ns authsvc.core-test
   (:require [clojure.test :refer :all]
-            [h-w.core :refer :all]))
+            [authsvc.core :refer :all]))
 
 (deftest a-test
   (testing "FIXME, I fail."

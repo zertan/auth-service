@@ -1,6 +1,5 @@
 (ns authsvc.middleware
-  (:require [ring.util.request :refer [body-string]]
-            [authsvc.debug :as debug]))
+  (:require [ring.util.request :refer [body-string]]))
 
 (defn wrap-body-string [handler]
   (fn [request]

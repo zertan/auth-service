@@ -1,3 +1,1 @@
-{"folksam" {:sso-url "https://tieto-idp.apps.openshift.onecloud.tieto.com/auth/realms/folksam"
-            :fns ['(some #(= % "3Scale Service Developer/API definer")
-                         (-> token :payload :realm_access :roles))]}}
+{:sso-url "https://tieto-idp.apps.openshift.onecloud.tieto.com/auth/realms/folksam"}
