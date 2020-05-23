@@ -1,4 +1,4 @@
-(ns h-w.jwt
+(ns authsvc.jwt
   (:require [cheshire.core :as json]
             [clojure.string :as string])
   (:import (java.util Base64)))

@@ -1,4 +1,4 @@
-(ns h-w.constants)
+(ns authsvc.constants)
 
 (def token-endpoint "/protocol/openid-connect/token")
 (def certs-endpoint "/protocol/openid-connect/certs")

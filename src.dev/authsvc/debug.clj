@@ -1,5 +1,4 @@
-(ns h-w.debug
-  (:gen-class))
+(ns authsvc.debug)
 
 (def auth-state (atom {:auth nil
                        :home nil
