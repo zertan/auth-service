@@ -3,5 +3,5 @@
 
 (def routes
   ["/protocol/openid-connect/" {"token" token
-                                "auth" auth
-                                "userinfo" userinfo}])
+                                "auth" redirect
+                                "userinfo" forward}])
