@@ -3,7 +3,7 @@
 #oc import-image mpiech/s2i-clojure --confirm
 #oc import-image my-redhat-openjdk-18/openjdk18-openshift --from=registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift --confirm
 #oc import-image openjdk-11-rhel7:latest --from=registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift --confirm
-lein uberjar
+#lein uberjar
 cp target/uberjar/authsvc-0.1.0-SNAPSHOT-standalone.jar deployments
 #   ;;oc new-build mpiech/s2i-clojure~./deployments --name=ccapi
 #oc new-build --binary=true --name=authsvc -i=openjdk-11-rhel7

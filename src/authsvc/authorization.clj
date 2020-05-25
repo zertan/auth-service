@@ -1,10 +1,11 @@
 (ns authsvc.authorization)
 
-(def decision-request
-  {:form-params {:audience (:client_id (:body-parsed 'request))
+(defn decision-request [context]
+  {:uri "/protocol/openid-connect/token"
+   :form-params {:audience (:client-id context)
                  :grant_type "urn:ietf:params:oauth:grant-type:uma-ticket"
                  :response_mode "decision"}
-   :headers {"Authorization" (str "Bearer " (:access-token 'request))}})
+   :headers {"Authorization" (str "Bearer " (:access-token context))}})
 
 (defn verify-authorization [response]
   (if (= (:body response) "{\"result\":true}")
