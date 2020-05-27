@@ -1,5 +1,6 @@
 (ns authsvc.handlers
-  (:require [clj-http.lite.client :as client]
+  (:require [clojure.core.async :refer [go <! timeout]]
+   [clj-http.lite.client :as client]
             [ring.util.response :as response]
             [authsvc.authorization :as auth]
             [authsvc.actions :as actions]
@@ -25,5 +26,6 @@
                                           :context ctx}))
         b ((middleware/cond-json (middleware/wrap-token (fn [x] x))) (assoc a :context ctx))
         c (client/request (merge (auth/decision-request @ctx) {:url (str (-> @config/config :sso :url) "/protocol/openid-connect/token")}))]
-    (actions/set-section-access ctx)
+    (go (<! (timeout 500))
+        (actions/set-section-access @ctx))
     a))
