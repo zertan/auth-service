@@ -20,4 +20,5 @@
 
 (defn -main [& args]
   (config/load-config)
-  (reset! repl-server (nrepl/start-server :port 7890)))
+  (reset! repl-server (nrepl/start-server :port 7890))
+  (run-server (app/app routes)))

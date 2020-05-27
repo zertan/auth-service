@@ -7,7 +7,6 @@
 (defn app [routes]
   (-> routes
       (make-handler)
-      apply-handlers
+      wrap-reload
       wrap-json-response
-      wrap-reload))
-
+      apply-handlers))

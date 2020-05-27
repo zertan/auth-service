@@ -7,6 +7,7 @@
 cp target/uberjar/authsvc-0.1.0-SNAPSHOT-standalone.jar deployments
 #   ;;oc new-build mpiech/s2i-clojure~./deployments --name=ccapi
 #oc new-build --binary=true --name=authsvc -i=openjdk-11-rhel7
+#oc new-build --binary=true --name=authsvc -i=openjdk-11-rhel7
 oc start-build --from-dir deployments/ authsvc
 
 # starting the app

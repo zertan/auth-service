@@ -4,7 +4,8 @@
             [ring.util.response :as response]))
 
 (def routes
-  ["/protocol/openid-connect/" {"token" token
-                                "auth" (fn [request]
-                                         (response/redirect (str (-> @config/config :sso :url) (:uri request) "?" (:query-string request))))
-                                "userinfo" forward}])
+  (let [forward-url (-> @config/config :sso :url)]
+    ["/protocol/openid-connect/" {"token" #'token
+                                  "auth" (fn [request]
+                                           (response/redirect (str forward-url (:uri request) "?" (:query-string request))))
+                                  "userinfo" (fn [request] (#'forward request forward-url))}]))

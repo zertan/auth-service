@@ -8,7 +8,7 @@
                  [http-kit "2.3.0"]
                  [ring/ring-json "0.5.0"]
                  [bidi "2.1.3"]
-                 [clj-http-lite "0.3.0"]
+                 [org.martinklepsch/clj-http-lite "0.4.3"]
                  [cheshire "5.10.0"]
                  [environ "1.2.0"]
                  [org.clojure/tools.nrepl "0.2.13"]
