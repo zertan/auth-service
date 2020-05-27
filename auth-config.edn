@@ -3,14 +3,4 @@
               :api-access-token "e6eb8eed33aefa85ff3ffe8e2671cbe4ea69c36d65ab3217b36db9a557e962d7"
               :role-section {"APP_I91_3scale_Integration_Adm_Pub" ["portal" "monitoring" "plans"]
                              "APP_I91_3scale_Integration_Utv_Kon" ["portal" "partners" "monitoring"]
-                             "3Scale Service Developer/API definer" ["portal" "partners" "monitoring"]}
-              :actions []
-              :requests {:accounts-list {:method :get
-                                         :uri "/admin/api/accounts.xml"}
-                         :users-list {:method :get
-                                      :uri "/admin/api/accounts/{account_id}/users.xml"}
-                         :user-permissions {:method :put
-                                            :uri "/admin/api/users/{id}/permissions.xml"
-                                            :form-params {:access_token 'access-token
-                                                          :id 'id
-                                                          :allowed-sections 'allowed-sections}}}}}
+}}}
