@@ -3,9 +3,9 @@
             [authsvc.config :as config]
             [ring.util.response :as response]))
 
-(def routes
+(defn routes []
   (let [forward-url (-> @config/config :sso :url)]
-    ["/protocol/openid-connect/" {"token" #'token
+    ["/protocol/openid-connect/" {"token" token
                                   "auth" (fn [request]
                                            (response/redirect (str forward-url (:uri request) "?" (:query-string request))))
-                                  "userinfo" (fn [request] (#'forward request forward-url))}]))
+                                  "userinfo" (fn [request] (forward request forward-url))}]))

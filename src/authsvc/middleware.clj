@@ -1,28 +1,7 @@
 (ns authsvc.middleware
-  (:require [ring.util.request :refer [body-string]]
-            [clojure.walk :refer [keywordize-keys]]
-            [ring.util.codec :refer [form-decode]]
-            [authsvc.config :as config]
+  (:require [ring.middleware.params :refer [wrap-params]]
             [cheshire.core :as json]
-            [ring.middleware.params :refer [wrap-params]]
-            [ring.middleware.json :refer  [wrap-json-body]]
-            [authsvc.debug :as debug]))
-
-(defn wrap-body-string [handler]
-  (fn [request]
-    (if (= (type (:body request)) org.httpkit.BytesInputStream)
-      (handler (assoc request :body (slurp (.bytes (:body request)))))
-      (handler request))))
-
-(defn wrap-body-form-parsed [handler]
-  (fn [request]
-    (if (= (type (:body request)) java.lang.String)
-        (handler (assoc request :body-parsed (keywordize-keys (form-decode (:body request)))))
-        (handler request))))
-
-(defn wrap-forward-url [handler]
-  (fn [request]
-    (handler (assoc request :forward-url (str (:sso-url @config/config) (:uri request))))))
+            [ring.middleware.json :refer  [wrap-json-body]]))
 
 (defn wrap-client-id [handler]
   (fn [request]
@@ -41,24 +20,17 @@
           (handler (assoc request :access-token (get (:body request) "access_token")))))
       (handler request))))
 
+(defn apply-handlers [handler]
+  (-> handler
+      wrap-client-id
+      wrap-token
+      wrap-params
+      (wrap-json-body handler {:keywords? true :bigdecimals? true})))
+
 (defn cond-json [handler]
   (fn [request]
-    ;; (condp #(= (type %2) %1)
-    ;;     )
     (if (= (type (:body request)) java.lang.String)
        (handler (assoc request :body (json/parse-string (:body request))))
       (if-not (= (type (:body request)) clojure.lang.PersistentHashMap)
         ((wrap-json-body handler {:keywords? true :bigdecimals? true}) request)
         (handler request)))))
-
-(defn apply-handlers [handler]
-  (-> handler
-      debug/wrap-to-atom
-      wrap-client-id
-      wrap-token
-      wrap-params
-      ;;wrap-body-form-parsed
-      (wrap-json-body handler {:keywords? true :bigdecimals? true})
-      ;;cond-json
-      ;;wrap-body-string
-      ))

@@ -1,10 +1,8 @@
 (ns authsvc.handlers
   (:require [clojure.core.async :refer [go <! timeout]]
-   [clj-http.lite.client :as client]
+            [clj-http.lite.client :as client]
             [ring.util.response :as response]
             [authsvc.authorization :as auth]
-            [authsvc.actions :as actions]
-            [authsvc.debug :as debug]
             [authsvc.middleware :as middleware]
             [authsvc.config :as config]
             [authsvc.actions :as actions]))

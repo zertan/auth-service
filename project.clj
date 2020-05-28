@@ -12,12 +12,9 @@
                  [org.martinklepsch/clj-http-lite "0.4.3"]
                  [cheshire "5.10.0"]
                  [environ "1.2.0"]
-                 [org.clojure/tools.nrepl "0.2.13"]
-                 [cider/cider-nrepl "0.25.0-alpha1"]
-                 [ring/ring-devel "1.8.1"]
                  [javax.xml.bind/jaxb-api "2.3.1"]
                  [org.glassfish.jaxb/jaxb-runtime "2.3.1"]]
-  :source-paths ["src" "src.dev"]
+  :source-paths ["src" "src.prod"]
   :main ^:skip-aot authsvc.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}
