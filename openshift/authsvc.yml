@@ -41,7 +41,7 @@ objects:
           deploymentconfig: authsvc
       spec:
         containers:
-        - image: docker-registry.default.svc:5000/tieto-poc-3scale-2/authsvc:latest
+        - image: authsvc:latest
           imagePullPolicy: Always
           name: authsvc
           ports:

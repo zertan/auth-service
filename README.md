@@ -2,7 +2,20 @@
 
 This is a service that can be put in-between a 3Scale API Management installation and a RH SSO/Keycloak instance. It intercepts the OpenID connect flow and performs extra authorization checks (based on role claims in the issued token) and calls the 3Scale API to set the correct section accesses based on the defined roles.
 
+## Building the jar and image
+
+Prerequisites: oc command line utility with connection to an OpenShift cluster.
+
+```bash
+oc project *namespace-to-deploy-in*
+cicd/build.sh
+``` 
+
+Run the openshift build script
+
 ## Installation
+
+First build the image by following the instructions in the previous section.
 
 Update the information in the supplied configmap template and deploy:
 
