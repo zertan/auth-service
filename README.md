@@ -1,36 +1,25 @@
-# h-w
+# Auth service
 
-FIXME: description
+This is a service that can be put in-between a 3Scale API Management installation and a RH SSO/Keycloak instance. It intercepts the OpenID connect flow and performs extra authorization checks (based on role claims in the issued token) and calls the 3Scale API to set the correct section accesses based on the defined roles.
 
 ## Installation
 
-Download from http://example.com/FIXME.
+Update the information in the supplied configmap template and deploy:
 
-## Usage
+```bash
+vi openshift/cm.yml
+oc create -f openshift/cm.yml
+```
 
-FIXME: explanation
+Then deploy the service:
 
-    $ java -jar h-w-0.1.0-standalone.jar [args]
-
-## Options
-
-FIXME: listing of options this app accepts.
-
-## Examples
-
-...
-
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
+```bash
+oc new-app -f openshift/authsvc.yml
+```
 
 ## License
 
-Copyright © 2020 FIXME
+Copyright © 2020 Daniel Hermansson
 
 This program and the accompanying materials are made available under the
 terms of the Eclipse Public License 2.0 which is available at

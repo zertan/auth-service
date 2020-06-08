@@ -1,6 +1,0 @@
-{:sso {:url "https://tieto-idp.apps.openshift.onecloud.tieto.com/auth/realms/folksam"}
- :threescale {:url "https://3scale-second-admin.apps.openshift.onecloud.tieto.com"
-              :api-access-token "e6eb8eed33aefa85ff3ffe8e2671cbe4ea69c36d65ab3217b36db9a557e962d7"
-              :role-section {"APP_I91_3scale_Integration_Adm_Pub" ["portal" "monitoring" "plans"]
-                             "APP_I91_3scale_Integration_Utv_Kon" ["portal" "partners" "monitoring"]
-}}}

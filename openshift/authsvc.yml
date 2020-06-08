@@ -8,28 +8,6 @@ metadata:
   name: authsvc
 objects:
 - apiVersion: v1
-  kind: ConfigMap
-  metadata:
-    name: authsvc-config
-  data:
-    auth-config.edn: |
-      {:sso {:url "https://tieto-idp.apps.openshift.onecloud.tieto.com/auth/realms/folksam"}
-       :threescale {:api-access-token "e6eb8eed33aefa85ff3ffe8e2671cbe4ea69c36d65ab3217b36db9a557e962d7"
-                    :account_id "1"
-                    :APP_I91_3scale_Integration_Adm_Pub {:sections ["portal" "monitoring" "plans"]}
-                    :APP_I91_3scale_Integration_Utv_Kon {:sections ["portal" "partners" "monitoring"]}
-                    :actions '[(fn [user-email] (let [users (client/request :users-list)]))
-                               (fn [access-token id allowed-sections] (client/request :user-permissions))]
-                    :requests {:accounts-list {:method :get
-                                               :uri "/admin/api/accounts.xml"}
-                               :users-list {:method :get
-                                            :uri "/admin/api/accounts/{account_id}/users.xml"}
-                               :user-permissions {:method :put
-                                                  :uri "/admin/api/users/{id}/permissions.xml"
-                                                  :form-params {:access_token 'access-token
-                                                                :id 'id
-                                                                :allowed-sections 'allowed-sections}}}}}
-- apiVersion: v1
   kind: DeploymentConfig
   metadata:
     annotations:
