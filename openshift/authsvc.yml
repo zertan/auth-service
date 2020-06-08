@@ -89,7 +89,7 @@ objects:
       app: ${SERVICE_NAME}
     name: ${SERVICE_NAME}
   spec:
-    host: ${SERVICE_NAME}-${NAMESPACE}.${WILDCARD_DOMAIN}
+    host: ${SERVICE_NAME}.${WILDCARD_DOMAIN}
     port:
       targetPort: 8080-tcp
     to:
