@@ -1,11 +1,11 @@
 apiVersion: template.openshift.io/v1
 kind: Template
 labels:
-  template: authsvc
+  template: ${SERVICE_NAME}
 metadata:
   annotations:
     description: Authsvc
-  name: authsvc
+  name: ${SERVICE_NAME}
 objects:
 - apiVersion: v1
   kind: DeploymentConfig
@@ -13,14 +13,14 @@ objects:
     annotations:
       openshift.io/generated-by: OpenShiftNewApp
     labels:
-      app: authsvc
-    name: authsvc
+      app: ${SERVICE_NAME}
+    name: ${SERVICE_NAME}
   spec:
     replicas: 1
     revisionHistoryLimit: 10
     selector:
-      app: authsvc
-      deploymentconfig: authsvc
+      app: ${SERVICE_NAME}
+      deploymentconfig: ${SERVICE_NAME}
     strategy:
       activeDeadlineSeconds: 21600
       resources: {}
@@ -37,13 +37,13 @@ objects:
           openshift.io/generated-by: OpenShiftNewApp
         creationTimestamp: null
         labels:
-          app: authsvc
-          deploymentconfig: authsvc
+          app: ${SERVICE_NAME}
+          deploymentconfig: ${SERVICE_NAME}
       spec:
         containers:
-        - image: authsvc:latest
+        - image: ${SERVICE_NAME}:latest
           imagePullPolicy: Always
-          name: authsvc
+          name: ${SERVICE_NAME}
           ports:
           - containerPort: 8080
             protocol: TCP
@@ -64,7 +64,7 @@ objects:
         volumes:
           - name: config-volume
             configMap:
-              name: authsvc-config
+              name: ${SERVICE_NAME}-config
         dnsPolicy: ClusterFirst
         restartPolicy: Always
         schedulerName: default-scheduler
@@ -76,25 +76,25 @@ objects:
     - imageChangeParams:
         automatic: true
         containerNames:
-        - authsvc
+        - ${SERVICE_NAME}
         from:
           kind: ImageStreamTag
-          name: authsvc:latest
+          name: ${SERVICE_NAME}:latest
       type: ImageChange
 - apiVersion: route.openshift.io/v1
   kind: Route
   metadata:
     annotations:
     labels:
-      app: authsvc
-    name: authsvc
+      app: ${SERVICE_NAME}
+    name: ${SERVICE_NAME}
   spec:
-    host: authsvc-tieto-poc-3scale-2.apps.openshift.onecloud.tieto.com
+    host: ${SERVICE_NAME}-${NAMESPACE}.${WILDCARD_DOMAIN}
     port:
       targetPort: 8080-tcp
     to:
       kind: Service
-      name: authsvc
+      name: ${SERVICE_NAME}
       weight: 100
     wildcardPolicy: None
 - apiVersion: v1
@@ -103,8 +103,8 @@ objects:
     annotations:
       openshift.io/generated-by: OpenShiftNewApp
     labels:
-      app: authsvc
-    name: authsvc
+      app: ${SERVICE_NAME}
+    name: ${SERVICE_NAME}
   spec:
     ports:
     - name: 8080-tcp
@@ -121,6 +121,13 @@ objects:
       targetPort: 8778
     selector:
       app: autsvc
-      deploymentconfig: authsvc
+      deploymentconfig: ${SERVICE_NAME}
     sessionAffinity: None
     type: ClusterIP
+parameters:
+- description: Service name
+  value: authsvc
+  name: SERVICE_NAME
+- description: Domain
+  value: apps.your.domain.com
+  name: WILDCARD_DOMAIN
