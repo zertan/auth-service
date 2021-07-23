@@ -8,7 +8,7 @@
 
 FROM clojure:alpine
 
-ENV NAME=h-w
+ENV NAME=authsvc
 ENV VERSION=0.1.0-SNAPSHOT
 
 COPY ${NAME}-${VERSION}-standalone.jar .
