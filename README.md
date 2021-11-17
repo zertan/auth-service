@@ -1,4 +1,6 @@
 # Auth service
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fzertan%2Fauth-service.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fzertan%2Fauth-service?ref=badge_shield)
+
 
 This is a service that can be put in-between a 3Scale API Management installation and a RH SSO/Keycloak instance. It intercepts the OpenID connect flow and performs extra authorization checks (based on role claims in the issued token) and calls the 3Scale API to set the correct section accesses based on the defined roles.
 
@@ -64,3 +66,6 @@ Public License, v. 2.0 are satisfied: GNU General Public License as published by
 the Free Software Foundation, either version 2 of the License, or (at your
 option) any later version, with the GNU Classpath Exception which is available
 at https://www.gnu.org/software/classpath/license.html.
+
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fzertan%2Fauth-service.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fzertan%2Fauth-service?ref=badge_large)
